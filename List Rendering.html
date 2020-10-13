@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>VueJS Code Practice</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    
+</head>
+<body>
+
+    <style>
+        ul{
+            list-style: none;
+        }
+        li{
+            display: inline;
+        }
+        .active{
+            background:aqua ;
+            color: brown;
+            padding: 10px;
+
+        }
+    </style>
+
+    <div id="root">
+            <ul>
+                <li>
+                    <a :class="{'active': activeLink == 'link1' }" :href="link1.url" :title="link1.title">{{ link1.text}}</a>
+                </li>
+                <li>
+                    <a :class="{'active': activeLink == 'link2' }" :href="link2.url" :title="link2.title">{{ link2.text}}</a>
+                </li>
+                <li>
+                    <a :class="{'active': activeLink == 'link3' }" :href="link3.url" :title="link3.title">{{ link3.text}}</a>
+                </li>
+            </ul>
+
+            <br/><br/><br/>
+
+            <p v-html="html"></p>
+
+    </div>
+
+
+
+    <script type="text/javascript" src='vue.js'></script>
+
+    <script type="text/javascript">
+       
+        var app = new Vue({
+            el: "#root",
+            data: {
+                link1: { 
+                    text: "Facebook", title: "Go to facebook", url: "http://www.facebook.com"
+                },
+                link2: { 
+                    text: "Youtube", title: "Go to youtube", url: "http://www.youtube.com"
+                },
+                link3: { 
+                    text: "Tweeter", title: "Go to tweeter", url: "http://www.tweeter.com"
+                },
+
+                activeLink: "link1",
+
+                html: '<a href="http://ali.hossain"> About Me </a>'
+            },
+            mounted: function(){
+                console.log("Mounted funct")
+            }
+        }); 
+
+        /*
+        var data = {name : "Ali Hossain"}
+
+        document.getElementById("name").value = data.name;
+        document.getElementById("output").innerHTML = "Your name is "+data.name;
+
+        function change(){
+            data.name = document.getElementById("name").value;
+            document.getElementById("output").innerHTML = "Your name is "+data.name;
+        } */
+
+        
+    </script>
+    
+</body> 
+</html>

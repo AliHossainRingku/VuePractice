@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>VueJS Code Practice</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    
+</head>
+<body>
+
+    <style>
+         ul{
+            list-style: none;
+        }
+        li{
+            display: inline;
+        }
+        .active{
+            background:aqua ;
+            color: brown;
+            padding: 10px;
+
+        }
+    </style>
+
+    <div id="root">
+        <h1>All Payments</h1> 
+        <p>{{today | bdFormat}}</p>
+        <ul>
+            <li v-for="(payment, i) in payments">
+                <p>{{i+1}}. {{payment.name | upperCase | lower}} {{payment.amount}}</p>
+            </li>
+                
+            <h3>Paid Payments</h3>
+            <li v-for="(payment, i) in payments">
+                <p>{{i+1}}. {{payment.name | upperCase}} {{payment.amount}}</p>
+            </li>
+
+            <h3>Unpaid Payments</h3>
+            <li v-for="(payment, i) in unpaidPayments">
+                <p>{{i+1}}. {{payment.name | upperCase}} {{payment.amount}}</p>
+            </li>
+
+            <h1>Total Amount: {{totalAmount}}</h1>            
+
+        </ul>        
+    </div>
+
+
+
+    <script type="text/javascript" src='vue.js'></script>
+
+    <script type="text/javascript">
+
+        Vue.filter("lower", function(s){
+            return s.toLowerCase();
+        })
+       
+        var app = new Vue({
+            el: "#root",
+            data: {
+                payments: [
+                    {name: "houseRent", amount: 25000, paid: true},
+                    {name: "electricity", amount: 1500, paid: true},
+                    {name: "gas", amount: 950, paid: false},
+                    {name: "water", amount: 500, paid: true},
+                    {name: "net", amount: 650, paid: false}
+                ],
+                today: new Date()
+            },
+
+            computed: {
+                unpaidPayments: function(){
+                    return this.payments.filter(function(p){
+                       return !p.paid;
+                    })
+                },
+
+                totalAmount: function(){
+                    sum = 0;
+                    for(var i=0; i<this.payments.length; i++){
+                        sum += this.payments[i].amount; 
+                    }
+
+                    return sum;
+                }
+            },
+            //This is local filter, only for this Vue app instance
+            filters: {
+                
+                upperCase: function(s){
+                    return s.toUpperCase();
+                },
+
+                bdFormat: function(d){
+
+                var dd = d.getUTCDate() + '-' +(d.getUTCMonth()+1) + '-'+(d.getUTCFullYear())
+                return dd;
+                }
+
+            },
+
+            methods: {
+                
+            }
+                
+        }); 
+
+        /*
+        var data = {name : "Ali Hossain"}
+
+        document.getElementById("name").value = data.name;
+        document.getElementById("output").innerHTML = "Your name is "+data.name;
+
+        function change(){
+            data.name = document.getElementById("name").value;
+            document.getElementById("output").innerHTML = "Your name is "+data.name;
+        } */
+
+        
+    </script>
+    
+</body> 
+</html>

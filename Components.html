@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>VueJS Code Practice</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+    
+</head>
+<body>
+
+    <div id="root">
+            <panel title="This is title 1"> Hello panel content using slot in component of the template. </panel>  
+            <panel title="This is title 2"> Hello panel content using slot in component of the template. </panel>  
+            <panel title="This is title 3"> 
+                <h1>Please enter your name: </h1>
+                <input type="text" v-model="name">
+                <button>Submit</button>
+            </panel>  
+
+
+    </div>
+
+
+
+    <script type="text/javascript" src='vue.js'></script>
+    <script type="text/javascript">
+       
+        Vue.component("panel", {
+            template: `
+            <div class="panel" v-if="show">
+                <div class="panelTitle">
+                    <div class="close" @click="show = false">x</div>
+                    {{title}}
+                </div>
+                <div class="panelContent">
+                    <slot></slot>
+                </div>
+            </div>
+            `,
+            props: ['title','content'],
+            data: function(){
+                return {
+                    show: true
+                }
+            }
+
+        });
+
+        var app = new Vue({
+            el: "#root",
+            data: {
+            
+            },
+            computed: {
+                show: true
+            }
+                
+        }); 
+
+        /*
+        var data = {name : "Ali Hossain"}
+
+        document.getElementById("name").value = data.name;
+        document.getElementById("output").innerHTML = "Your name is "+data.name;
+
+        function change(){
+            data.name = document.getElementById("name").value;
+            document.getElementById("output").innerHTML = "Your name is "+data.name;
+        } */
+
+        
+    </script>
+    
+</body> 
+</html>

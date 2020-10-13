@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>VueJS Code Practice</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    
+</head>
+<body>
+
+    <style>
+         ul{
+            list-style: none;
+        }
+        li{
+            display: inline;
+        }
+        .active{
+            background:aqua ;
+            color: brown;
+            padding: 10px;
+
+        }
+    </style>
+
+    <div id="root">
+        <h1>Skills</h1>
+        <ul>
+            
+                <!--li v-for="(skill,i) in skills" v-show="show">
+                    <p v-if="skill.experience>=2">{{i+1}}. {{skill.name}} {{skill.experience}}</p>
+                </li-->
+                <li v-for="(skill, i) in skills">
+                    <p>{{skill}} <button v-on:click="removeSkill(i)">x</button></p>
+                </li>
+                <input type="text" v-model="newSkill">
+                <button v-on:click="addNewSkills()">Add</button>
+            
+        </ul>        
+    </div>
+
+
+
+    <script type="text/javascript">
+       
+        var app = new Vue({
+            el: "#root",
+            data: {
+                newSkill: "",
+                skills: [
+                   /* { name: "HTML", experience: 5 },
+                    { name: "CSS", experience: 4 },
+                    { name: "PHP", experience: 3 },
+                    { name: "Laravel", experience: 3 },
+                    { name: "Vue", experience: 1 },
+                    { name: "Java", experience: 2 }
+                    */
+                    "HTML", "CSS", "Java"
+                    ], 
+                show: true,
+            },
+            methods: {
+                addNewSkills(){
+                    this.skills.push(this.newSkill)
+                    this.newSkill=''
+                },
+                removeSkill(i){
+                    this.skills.splice(i,1)
+                }
+            }
+                
+        }); 
+
+        /*
+        var data = {name : "Ali Hossain"}
+
+        document.getElementById("name").value = data.name;
+        document.getElementById("output").innerHTML = "Your name is "+data.name;
+
+        function change(){
+            data.name = document.getElementById("name").value;
+            document.getElementById("output").innerHTML = "Your name is "+data.name;
+        } */
+
+        
+    </script>
+    
+</body> 
+</html>
